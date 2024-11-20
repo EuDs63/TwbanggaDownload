@@ -233,7 +233,7 @@ def download_video(video_url, video_name, save_path="."):
             chunk_size = 1024  # 每次读取的字节大小
 
             # 创建保存文件路径
-            file_path = f"{save_path}/{video_name}.mp4"
+            file_path = f"{save_path}/第{index}集_{video_name}.mp4"
 
             # 下载视频
             with open(file_path, "wb") as f, tqdm(
@@ -256,8 +256,9 @@ def download_video(video_url, video_name, save_path="."):
         print(f"下载失败，发生未知错误: {e}")
     return None
 
-index = 4
-download_info = fetch_download_url(index)
-video_url = download_info["video"]["url"]
-video_name = content[index - 1]["contentTitle"]
-download_video(video_url, video_name)
+for i in range(4, 13):
+    index = i
+    download_info = fetch_download_url(index)
+    video_url = download_info["video"]["url"]
+    video_name = content[index - 1]["contentTitle"]
+    download_video(video_url, video_name)
